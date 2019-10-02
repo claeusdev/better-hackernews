@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getStoryIds } from "../services/api";
 import { Story } from "../components/Story";
+import {
+  StoriesContainerWrapper,
+  GlobalStyle
+} from "../styles/StoriesContainerStyles";
 
 function StoriesContainer() {
   const [stories, setStories] = useState([]);
@@ -14,12 +18,15 @@ function StoriesContainer() {
 
   console.log(stories);
   return (
-    <div className="App">
+    <StoriesContainerWrapper data-testid="stories-container">
+      <GlobalStyle />
       <h1>Better Hackernews</h1>
-      {stories.map(story => (
-        <Story key={story} id={story} />
-      ))}
-    </div>
+      <ul>
+        {stories.map(story => (
+          <Story key={story} id={story} />
+        ))}
+      </ul>
+    </StoriesContainerWrapper>
   );
 }
 

@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getStory } from "../services/api";
+import {
+  StoryWrapper,
+  StoryTitle,
+  StoryMeta,
+  StoryMetaElement
+} from "../styles/StoryStyles";
 
 export const Story = ({ id }) => {
   const [story, setStory] = useState({});
@@ -11,14 +17,20 @@ export const Story = ({ id }) => {
     findStory();
   }, [id]);
   return story && story.url ? (
-    <ul>
-      <li>
-        <a href={story.url}>
-          <h1>{story.title}</h1>
-          <p>By: {story.by}</p>
-          <p>Posted: {story.time}</p>
-        </a>
-      </li>
-    </ul>
+    <StoryWrapper data-testid="story">
+      <StoryTitle>
+        <a href={story.url}>{story.title}</a>
+      </StoryTitle>
+
+      <StoryMeta>
+        <span className="story__by" data-testid="story-by">
+          <StoryMetaElement color="#000">By: </StoryMetaElement> {story.by}
+        </span>{" "}
+        <span className="story__time" data-testid="story-by">
+          <StoryMetaElement color="#000">Posted: </StoryMetaElement>{" "}
+          {story.time}
+        </span>
+      </StoryMeta>
+    </StoryWrapper>
   ) : null;
 };
