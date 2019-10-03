@@ -16,7 +16,7 @@ function StoriesContainer() {
       return setStories(data);
     }
     allStories();
-  }, []);
+  }, [count]);
 
   return (
     <StoriesContainerWrapper data-testid="stories-container">
