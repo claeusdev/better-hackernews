@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import { getStoryIds } from "../services/api";
 import { Story } from "../components/Story";
 import {
   StoriesContainerWrapper,
   GlobalStyle
 } from "../styles/StoriesContainerStyles";
+import { useInfinteScroll } from "../hooks/useInfiteScroll";
 
 function StoriesContainer() {
+  const { count } = useInfinteScroll();
   const [stories, setStories] = useState([]);
   useEffect(() => {
     async function allStories() {
@@ -14,15 +16,15 @@ function StoriesContainer() {
       return setStories(data);
     }
     allStories();
-  }, []);
+  }, [count]);
 
-  console.log(stories);
+  console.log(count);
   return (
     <StoriesContainerWrapper data-testid="stories-container">
       <GlobalStyle />
       <h1>Better Hackernews</h1>
       <ul>
-        {stories.map(story => (
+        {stories.slice(0, count).map(story => (
           <Story key={story} id={story} />
         ))}
       </ul>
