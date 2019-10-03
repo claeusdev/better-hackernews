@@ -10,7 +10,7 @@ export const getStory = async id => {
   return data && selectFields(data);
 };
 export const getStoryIds = async () => {
-  const result = await axios.get(newStoriesUrl).then(data => data);
-  console.log(result);
-  return result;
+  const { data } = await axios.get(newStoriesUrl);
+  console.log(data);
+  return data;
 };

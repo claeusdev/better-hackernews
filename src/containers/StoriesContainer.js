@@ -12,21 +12,21 @@ function StoriesContainer() {
   const [stories, setStories] = useState([]);
   useEffect(() => {
     async function allStories() {
-      const { data } = await getStoryIds();
+      const data = await getStoryIds();
       return setStories(data);
     }
     allStories();
-  }, [count]);
+  }, []);
 
-  console.log(count);
   return (
     <StoriesContainerWrapper data-testid="stories-container">
       <GlobalStyle />
       <h1>Better Hackernews</h1>
       <ul>
-        {stories.slice(0, count).map(story => (
-          <Story key={story} id={story} />
-        ))}
+        {stories &&
+          stories
+            .slice(0, count)
+            .map(story => <Story key={story} id={story} />)}
       </ul>
     </StoriesContainerWrapper>
   );
